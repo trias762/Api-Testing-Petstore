@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "dd9a203a-bf2e-4714-80e3-2454e1ece82c",
+		"name": "pet store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29811039"
+	},
+	"item": [
+		{
+			"name": "create user account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"test1\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest123\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find valid username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find invalid username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testcoba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/login?username=testcoba&password=trytest1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "testcoba"
+						},
+						{
+							"key": "password",
+							"value": "trytest1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "valid login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/login?username=test1&password=trytest123",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "test1"
+						},
+						{
+							"key": "password",
+							"value": "trytest123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User without username",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user with username",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"testlagi\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user using invalid endpoint",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"test2\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/testingcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testingcoba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete valid username",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testlagi",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testlagi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete invalid username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testingcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testingcoba"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
