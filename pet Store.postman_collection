@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "dd9a203a-bf2e-4714-80e3-2454e1ece82c",
+		"name": "pet store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29811039"
+	},
+	"item": [
+		{
+			"name": "create user account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create User\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"test1\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest123\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find valid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Find Valid User\", function(){\r",
+							"pm.expect(pm.response.text()).to.include(\"id\",\"username\");\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find invalid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Invalid Username\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testcoba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Invalid Login\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/login?username=testcoba&password=trytest1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "testcoba"
+						},
+						{
+							"key": "password",
+							"value": "trytest1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "valid login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid Login\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.text()).to.include(\"logged in user session\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/login?username=test1&password=trytest123",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "test1"
+						},
+						{
+							"key": "password",
+							"value": "trytest123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User without username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update without Username\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user using invalid endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update invalid username\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"test2\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/testingcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testingcoba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user with username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update user\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"testlagi\",\r\n  \"firstName\": \"try\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"trytest@gmail.com\",\r\n  \"password\": \"trytest22\",\r\n  \"phone\": \"0855443332\",\r\n  \"userStatus\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/user/test1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete valid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid Delete\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.text()).to.include(\"testlagi\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testlagi",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testlagi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete invalid username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"invalid Delete\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/user/testingcoba",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"user",
+						"testingcoba"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
