@@ -119,7 +119,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Invalid Login\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.status(404);\r",
 							"    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
 							"});"
 						],
